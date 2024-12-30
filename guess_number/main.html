@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zgadnij liczbę</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+        }
+        #feedback {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Zgadnij liczbę!</h1>
+        <p>Spróbuj odgadnąć liczbę od 1 do 100.</p>
+        <input type="number" id="guessInput" placeholder="Wpisz liczbę" min="1" max="100">
+        <button id="guessButton" onclick="guessNumber()">Zgadnij</button>
+        <p id="feedback"></p>
+    </div>
+
+    <script>
+        // Gra "Zgadnij liczbę"
+
+        // Generowanie losowej liczby od 1 do 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        // Funkcja obsługująca zgadywanie
+        function guessNumber() {
+            const userGuess = Number(document.getElementById('guessInput').value);
+            const feedback = document.getElementById('feedback');
+            attempts++;
+
+            if (userGuess === randomNumber) {
+                feedback.textContent = `Gratulacje! Zgadłeś liczbę w ${attempts} próbach!`;
+                feedback.style.color = 'green';
+                document.getElementById('guessButton').disabled = true;
+            } else if (userGuess < randomNumber) {
+                feedback.textContent = 'Za mało! Spróbuj wyższej liczby.';
+                feedback.style.color = 'red';
+            } else {
+                feedback.textContent = 'Za dużo! Spróbuj niższej liczby.';
+                feedback.style.color = 'red';
+            }
+        }
+
+        console.log("Wylosowana liczba (dla testów):", randomNumber);
+    </script>
+</body>
+</html>
